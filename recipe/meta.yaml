@@ -6,22 +6,22 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/wield.pytest-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/wield.pytest-{{ version }}.tar.gz
   sha256: 7669bd0b54920a898ef0efea7e8c5ac60d5ff67aa148c3bdb1cc8939655224d1
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.6
+    - python {{ python_min }}
     - setuptools >=45
     - wheel
     - pip
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - pytest
 
 test:
@@ -31,6 +31,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/wieldphysics/wield-pytest
